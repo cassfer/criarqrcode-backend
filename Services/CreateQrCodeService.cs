@@ -12,9 +12,7 @@ namespace CriarQrCode_backend.Services
             BitmapByteQRCode qrCode = new BitmapByteQRCode(qrCodeData);
             byte[] qrCodeAsBitmapByteArr = qrCode.GetGraphic(20);
 
-            string B64QrCode = Convert.ToBase64String(qrCodeAsBitmapByteArr);
-
-            return B64QrCode;
+            return Convert.ToBase64String(qrCodeAsBitmapByteArr);
         }
 
     }
