@@ -1,5 +1,5 @@
+using CriarQrCode_backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using CriarQrCode_backend.Model;
 
 namespace CriarQrCode_backend.Controllers
 {
@@ -7,23 +7,24 @@ namespace CriarQrCode_backend.Controllers
     [Route("createQrCode")]
     public class CreateQrCodeController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+
+        private readonly CreateQrCodeService _createQrCodeService;
 
         private readonly ILogger<CreateQrCodeController> _logger;
 
 
-        public CreateQrCodeController(ILogger<CreateQrCodeController> logger)
+        public CreateQrCodeController(ILogger<CreateQrCodeController> logger, CreateQrCodeService createQrCodeService)
         {
             _logger = logger;
+            _createQrCodeService = createQrCodeService;
         }
 
         [HttpGet(Name = "home")]
         public string Get()
         {
-            return ("Retorno positivo!");
+            const string text = "Texto de teste!";
+            return this._createQrCodeService.createQrCodeFromText(text);
+
         }
     }
 }
